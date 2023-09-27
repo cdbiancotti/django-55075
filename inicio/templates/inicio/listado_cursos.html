@@ -1,0 +1,20 @@
+{% extends "compartidos/base.html" %}
+ {% block head %}
+ <title>Cursos</title>
+ {% endblock head %} 
+ {% block h1_header %} Cursos {% endblock h1_header %}
+{% block main %}
+
+<form action="">
+    {{formulario}}
+    <input type="submit" value="Buscar" />
+</form>
+
+<ul>
+    {% for curso in cursos_encontrados %}
+        <li>{{curso}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock main %}
+    

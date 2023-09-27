@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        Bienvenidos a mi pagina!!! Fecha: {{fecha}}
-    </body>
-</html>
+{% extends "compartidos/base.html" %} 
+
+{% block head %}<title>Inicio</title>{% endblock head %} 
+
+{% block h1_header %}
+Bienvienidos a mi pagina!
+{% endblock h1_header %}

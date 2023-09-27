@@ -1,0 +1,18 @@
+{% extends "compartidos/base.html" %} {% block head %}<title>Crear curso</title
+>{% endblock head %} {% block h1_header %} Crear curso {% endblock h1_header %}
+{% block main %}
+
+<form action="" method="post">
+    {% csrf_token %} {% comment %}
+    <p>Curso: <input type="text" name="titulo" /></p>
+    <p>Numero: <input type="number" name="numero" /></p>
+    {% endcomment %}
+    <table>
+        {{formulario}}
+    </table>
+
+    {% comment %} <button>Crear</button> {% endcomment %}
+    <input type="submit" value="Crear" />
+</form>
+
+{% endblock main %}
