@@ -1,0 +1,12 @@
+{% extends "compartidos/base.html" %} {% block head %}<title>Eliminar paleta</title
+    >{% endblock head %} {% block h1_header %} Eliminar paleta {% endblock h1_header %}
+    {% block main %}
+    
+    <form action={% url "eliminar_paleta" paleta.id %} method="post">
+        {% csrf_token %}
+        <p>Realmente quiere eliminar la paleta {{paleta}}</p>
+        <input type="submit" value="Confirmar" />
+    </form>
+    
+    {% endblock main %}
+    

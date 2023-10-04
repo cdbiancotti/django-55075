@@ -1,0 +1,14 @@
+{% extends "compartidos/base.html" %} {% block head %}<title>Crear paleta</title
+    >{% endblock head %} {% block h1_header %} Crear paleta {% endblock h1_header %}
+    {% block main %}
+    
+    <form action={% url "crear_paleta" %} method="post">
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <input type="submit" value="Crear" />
+    </form>
+    
+    {% endblock main %}
+    

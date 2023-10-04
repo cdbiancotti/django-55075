@@ -5,16 +5,23 @@
  {% block h1_header %} Cursos {% endblock h1_header %}
 {% block main %}
 
+<a class="navbar-brand" href={% url "crear_curso" %}>Crear curso</a>
 <form action="">
     {{formulario}}
     <input type="submit" value="Buscar" />
 </form>
 
+{% if cursos_encontrados %}
 <ul>
     {% for curso in cursos_encontrados %}
-        <li>{{curso}}</li>
+    <li>
+        <a href={% url "detalle_curso" curso.id %}>{{curso}}</a> || <a href={% url "editar_curso" curso.id %}>Editar</a> || <a href={% url "eliminar_curso" curso.id %}>Eliminar</a>
+    </li>
     {% endfor %}
 </ul>
+{% else %}
+<p>No se encontraron cursos.</p>
+{% endif %}
 
 {% endblock main %}
     

@@ -1,9 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import Template, Context, loader
 from django.http import HttpResponse
 from datetime import datetime
 from inicio.models import Curso
-from inicio.forms import CursoFormulario, CursoBusquedaFormulario
+from inicio.forms import CrearCursoFormulario, EditarCursoFormulario, CursoBusquedaFormulario
 
 
 def inicio(request):
@@ -39,16 +39,34 @@ def inicio(request):
 def crear_curso(request):
     
     if request.method == 'POST':
-        formulario = CursoFormulario(request.POST)
+        formulario = CrearCursoFormulario(request.POST)
         if formulario.is_valid():
             data = formulario.cleaned_data
             curso = Curso(titulo=data.get('titulo'), numero=data['numero'])
             curso.save()
+            return redirect('cursos')
         else:
             return render(request, r'inicio\crear_curso.html', {'formulario': formulario})
             
-    formulario = CursoFormulario()
+    formulario = CrearCursoFormulario()
     return render(request, r'inicio\crear_curso.html', {'formulario': formulario})
+
+def editar_curso(request, curso_id):
+    curso_a_editar = Curso.objects.get(id=curso_id)
+
+    if request.method == 'POST':
+        formulario = EditarCursoFormulario(request.POST)
+        if formulario.is_valid():
+            data = formulario.cleaned_data
+            curso_a_editar.titulo = data['titulo']
+            curso_a_editar.numero = data['numero']
+            curso_a_editar.save()
+            return redirect('cursos')
+        else:
+            return render(request, 'inicio/editar_curso.html', {'formulario': formulario})
+            
+    formulario = EditarCursoFormulario(initial={'titulo': curso_a_editar.titulo, 'numero': curso_a_editar.numero})
+    return render(request, r'inicio/editar_curso.html', {'formulario': formulario})
 
 def listado_cursos(request):
     
@@ -61,3 +79,14 @@ def listado_cursos(request):
             
     formulario = CursoBusquedaFormulario()
     return render(request, r'inicio\listado_cursos.html', {'formulario': formulario, 'cursos_encontrados': cursos_encontrados})
+
+def eliminar_curso(request, curso_id):
+    curso_a_eliminar = Curso.objects.get(id=curso_id)
+    curso_a_eliminar.delete()
+    
+    return redirect('cursos')
+
+def detalle_curso(request, curso_id):
+    curso = Curso.objects.get(id=curso_id)
+    return render(request, 'inicio/detalle_curso.html', {'curso': curso})
+    

@@ -1,0 +1,27 @@
+{% extends "compartidos/base.html" %}
+ {% block head %}
+ <title>Paletas</title>
+ {% endblock head %} 
+ {% block h1_header %} Paletas {% endblock h1_header %}
+{% block main %}
+
+<a class="navbar-brand" href={% url "crear_paleta" %}>Crear paleta</a>
+{% comment %} <form action="">
+    {{formulario}}
+    <input type="submit" value="Buscar" />
+</form> {% endcomment %}
+
+{% if listado_paletas %}
+<ul>
+    {% for paleta in listado_paletas %}
+    <li>
+        <a href={% url "detalle_paleta" paleta.id %}>{{paleta}}</a> || <a href={% url "editar_paleta" paleta.id %}>Editar</a> || <a href={% url "eliminar_paleta" paleta.id %}>Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No se encontraron paletas.</p>
+{% endif %}
+
+{% endblock main %}
+    

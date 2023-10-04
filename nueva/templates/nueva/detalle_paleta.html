@@ -1,0 +1,18 @@
+{% extends "compartidos/base.html" %} 
+
+{% block head %}<title>Detalle paleta</title>{% endblock head %} 
+
+{% block h1_header %}
+Detalles de la paleta con id {{paleta.id}}
+{% endblock h1_header %}
+
+{% block main %}
+
+<ul>
+    <li>Marca: {{paleta.marca}}</li>
+    <li>Modelo: {{paleta.modelo}}</li>
+    <li>Descripcion: {{paleta.descripcion}}</li>
+    <li>Fecha de lanzamiento: {{paleta.fecha_lanzamiento}}</li>
+</ul>
+
+{% endblock main %}
