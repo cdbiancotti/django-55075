@@ -1,0 +1,18 @@
+{% extends "compartidos/base.html" %}
+{% block head %}
+<title>Editar perfil</title>
+{% endblock head %}
+{% block h1_header %} Editar perfil {% endblock h1_header %}
+{% block main %}
+
+<form action={% url "editar_perfil" %} method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{formulario}}
+    </table>
+    <input type="submit" value="Editar" />
+    <a href={% url "editar_pass" %}>Cambiar contrasenia</a>
+</form>
+
+{% endblock main %}
+    

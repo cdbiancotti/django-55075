@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from inicio.models import Curso
 from inicio.forms import CrearCursoFormulario, EditarCursoFormulario, CursoBusquedaFormulario
-
+from django.contrib.auth.decorators import login_required
 
 def inicio(request):
     
@@ -51,6 +51,7 @@ def crear_curso(request):
     formulario = CrearCursoFormulario()
     return render(request, r'inicio\crear_curso.html', {'formulario': formulario})
 
+@login_required
 def editar_curso(request, curso_id):
     curso_a_editar = Curso.objects.get(id=curso_id)
 
@@ -68,6 +69,7 @@ def editar_curso(request, curso_id):
     formulario = EditarCursoFormulario(initial={'titulo': curso_a_editar.titulo, 'numero': curso_a_editar.numero})
     return render(request, r'inicio/editar_curso.html', {'formulario': formulario})
 
+
 def listado_cursos(request):
     
     formulario = CursoBusquedaFormulario(request.GET)
@@ -80,11 +82,13 @@ def listado_cursos(request):
     formulario = CursoBusquedaFormulario()
     return render(request, r'inicio\listado_cursos.html', {'formulario': formulario, 'cursos_encontrados': cursos_encontrados})
 
+@login_required
 def eliminar_curso(request, curso_id):
     curso_a_eliminar = Curso.objects.get(id=curso_id)
     curso_a_eliminar.delete()
     
     return redirect('cursos')
+
 
 def detalle_curso(request, curso_id):
     curso = Curso.objects.get(id=curso_id)

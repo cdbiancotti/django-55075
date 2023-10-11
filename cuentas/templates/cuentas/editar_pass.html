@@ -1,0 +1,17 @@
+{% extends "compartidos/base.html" %}
+{% block head %}
+<title>Editar contrasenia</title>
+{% endblock head %}
+{% block h1_header %} Editar contrasenia {% endblock h1_header %}
+{% block main %}
+
+<form action={% url "editar_perfil" %} method="post">
+    {% csrf_token %}
+    <table>
+        {{form}}
+    </table>
+    <input type="submit" value="Confirmar" />
+</form>
+
+{% endblock main %}
+    

@@ -6,10 +6,10 @@
 {% block main %}
 
 <a class="navbar-brand" href={% url "crear_paleta" %}>Crear paleta</a>
-{% comment %} <form action="">
-    {{formulario}}
+<form action="">
+    <input type="text" name='marca' placeholder='Ingrese marca...'>
     <input type="submit" value="Buscar" />
-</form> {% endcomment %}
+</form>
 
 {% if listado_paletas %}
 <ul>

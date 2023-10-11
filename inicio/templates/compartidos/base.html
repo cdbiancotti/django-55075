@@ -36,7 +36,17 @@
                 <a class="navbar-brand" href={% url "inicio" %}>Inicio</a>
                 <a class="navbar-brand" href={% url "cursos" %}>Cursos</a>
                 <a class="navbar-brand" href={% url "paletas" %}>Paletas</a>
-                {% comment %} <a class="btn btn-primary" href="#signup">Sign Up</a> {% endcomment %}
+                {% if request.user.is_authenticated %}
+                {% if request.user.infoextra.avatar %}
+                    <img src={{request.user.infoextra.avatar.url}} alt="" height="40px">
+                {% endif %}
+                <a class="navbar-brand" href={% url "editar_perfil" %}>{{request.user.username}}</a>
+                <a class="btn btn-primary" href={% url "logout" %}>Cerrar sesion</a>
+                {% else %}
+                <a class="btn btn-primary" href={% url "login" %}>Iniciar sesion</a>
+                <a class="btn btn-warning" href={% url "registro" %}>Registrarse</a>
+                {% endif %}
+            
             </div>
         </nav>
         <!-- Masthead-->
